@@ -14,7 +14,39 @@
     "allowJs": true,
     "checkJs": true,
     "isolatedModules": true,
-    "moduleDetection": "force"
+    "moduleDetection": "force",
+    "baseUrl": "./src",
+    "paths": {
+      "@application/*": [
+        "Application/*"
+      ],
+      "@domain/*": [
+        "Domain/*"
+      ],
+      "@svelte/*": [
+        "Svelte/*"
+      ],
+      "@infrastructure/*": [
+        "Infrastructure/*"
+      ],
+      "@persistence/*": [
+        "Persistence/*"
+      ],
+      "@presentation/*": [
+        "Presentation/*"
+      ],
+      "@cli/*": [
+        "Presentation/CLI/*"
+      ],
+      "@tests/*": [
+        "Tests/*"
+      ]
+    }
   },
-  "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.js",
+    "src/**/*.svelte",
+    "vite.config.ts"
+  ]
 }

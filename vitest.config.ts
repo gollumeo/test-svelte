@@ -1,15 +1,21 @@
-import { svelte } from '@sveltejs/vite-plugin-svelte'
-import * as path from "node:path";
-import { defineConfig } from 'vite'
+/// <reference types="vitest" />
+import { svelte } from '@sveltejs/vite-plugin-svelte';
+import * as path from 'node:path';
+import { defineConfig } from 'vitest/config';
 
-// https://vite.dev/config/
 export default defineConfig({
     plugins: [svelte()],
+    test: {
+        environment: 'jsdom',
+        globals: true,
+        include: ['src/Tests/**/*.{spec,test}.ts'],
+        setupFiles: [],
+    },
     resolve: {
         alias: {
             '@application': path.resolve(__dirname, './src/Application'),
             '@domain': path.resolve(__dirname, './src/Domain'),
-            '@svelte': path.resolve(__dirname, './src/Svelte'),
+            '@framework': path.resolve(__dirname, './src/Framework'),
             '@infrastructure': path.resolve(__dirname, './src/Infrastructure'),
             '@persistence': path.resolve(__dirname, './src/Persistence'),
             '@presentation': path.resolve(__dirname, './src/Presentation'),
@@ -17,4 +23,4 @@ export default defineConfig({
             '@tests': path.resolve(__dirname, './src/Tests'),
         },
     },
-})
+});
