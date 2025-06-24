@@ -22,5 +22,13 @@ describe('FetchHttpClient', (): void =>
 
         expect(global.fetch).toHaveBeenCalledWith('https://example.com/todos');
         expect(result).toBe(dummyData);
+    });
+
+    it('should throw if fetch fails', async (): Promise<void> => 
+    {
+        global.fetch = vi.fn().mockResolvedValue(new Error('Network Error'));
+
+        const client: IFetchClient = new HttpFetchClient();
+        await expect(client.get('https://example.com')).rejects.toThrow('Network Error');
     })
 })
