@@ -7,7 +7,7 @@ export class HttpFetchClient implements IFetchClient
         const response: Response = await fetch(url);
         if (!response.ok) 
         {
-            throw new Error("Network Error");
+            throw new Error(`Network Error: ${ response.status } — ${ response.statusText }`);
         }
         return response.json();
     }
