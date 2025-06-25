@@ -1,4 +1,4 @@
-import { HttpFetchClient } from "@infrastructure/Fetch/Clients/HttpFetchClient";
+import { FetchHttpClient } from "@infrastructure/Fetch/Clients/FetchHttpClient";
 import type { IFetchClient } from "@infrastructure/Fetch/Contracts/IFetchClient";
 import { beforeEach, describe, expect, vi } from "vitest";
 
@@ -18,7 +18,7 @@ describe('FetchHttpClient', (): void =>
             json: vi.fn().mockResolvedValue(dummyData)
         }) as never;
 
-        const client: IFetchClient = new HttpFetchClient();
+        const client: IFetchClient = new FetchHttpClient();
         const result: object[] = await client.get('https://example.com/todos');
 
         expect(global.fetch).toHaveBeenCalledWith('https://example.com/todos');
@@ -29,7 +29,7 @@ describe('FetchHttpClient', (): void =>
     {
         global.fetch = vi.fn().mockRejectedValue(new Error('Network Error'));
 
-        const client: IFetchClient = new HttpFetchClient();
+        const client: IFetchClient = new FetchHttpClient();
         await expect(client.get('https://example.com')).rejects.toThrow('Network Error');
     });
 
@@ -41,7 +41,7 @@ describe('FetchHttpClient', (): void =>
             statusText: 'Not Found',
         });
 
-        const client: IFetchClient = new HttpFetchClient();
+        const client: IFetchClient = new FetchHttpClient();
 
         await expect((): Promise<object[]> =>
             client.get("https://dummyjson.com/todos")

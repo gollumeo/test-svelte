@@ -1,6 +1,6 @@
 import type { IFetchClient } from "@infrastructure/Fetch/Contracts/IFetchClient";
 
-export class HttpFetchClient implements IFetchClient
+export class FetchHttpClient implements IFetchClient
 {
     async get(url: string): Promise<object[]>
     {
